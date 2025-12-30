@@ -1,0 +1,35 @@
+{
+  "languages": {
+    "Python": {
+      "language_servers": ["ruff"],
+      "formatter": {
+        "external": {
+          "command": "ruff",
+          "arguments": ["format", "--stdin-filename", "{buffer_path}", "-"],
+        },
+      },
+      "format_on_save": "on",
+    },
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python",
+          "venvPath": ".",
+          "venv": ".venv",
+        },
+      },
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "lineLength": 88,
+          "lint": {
+            "select": ["E", "F", "I", "N", "W", "UP"],
+          },
+        },
+      },
+    },
+  },
+}
