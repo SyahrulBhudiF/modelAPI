@@ -1,22 +1,22 @@
 # AI Model Serving API
 
-FastAPI-based stateless inference service untuk serving multiple AI models with input video.
+FastAPI-based stateless inference service for serving multiple AI models with video input.
 
-> **Note:** This is a template. Adjust the dependencies in `pyproject.toml` according to your model’s requirements. Remove any libraries that are not needed (for example, `dlib` if face detection is not required).
+> **Note:** This is a template. Adjust the dependencies in `pyproject.toml` according to your model's requirements. Remove any libraries that are not needed (e.g., `dlib` if face detection is not required).
 
 ## Features
 
-- **Multi-Model Support** - Register multiple models dengan handler berbeda
-- **Stateless Design** - Tidak ada database, session, atau server-side state
+- **Multi-Model Support** - Register multiple models with different handlers
+- **Stateless Design** - No database, session, or server-side state
 - **Bearer Token Auth** - Simple static token authentication
-- **Video Processing** - Support preprocessing video
+- **Video Processing** - Support for video preprocessing pipelines
 
 ## Quick Start
 
 ### 1. Install Dependencies
 
 ```bash
-# Jika menggunakan dlib (opsional, untuk face detection)
+# If using dlib (optional, for face detection)
 # Fedora/RHEL
 sudo dnf install python3-devel cmake gcc-c++
 # Ubuntu/Debian
@@ -74,7 +74,7 @@ POST /api/v1/infer/{model_name}
 Authorization: Bearer <token>
 Content-Type: multipart/form-data
 
-files: file(s) untuk inference
+files: file(s) for inference
 ```
 
 **Response:**
@@ -121,9 +121,9 @@ response = requests.post(
 print(response.json())
 ```
 
-## Adding New Model Handler
+## Adding a New Model Handler
 
-1. Buat handler baru di `app/services/handlers/`:
+1. Create a new handler in `app/services/handlers/`:
 
 ```python
 from app.services.base import BaseHandler
@@ -142,7 +142,7 @@ class MyHandler(BaseHandler):
         return {"prediction": result}
 ```
 
-2. Register di `app/services/model_registry.py`:
+2. Register it in `app/services/model_registry.py`:
 
 ```python
 HANDLER_TYPES = {
@@ -151,7 +151,7 @@ HANDLER_TYPES = {
 }
 ```
 
-3. Update `MODEL_REGISTRY` di `.env`:
+3. Update `MODEL_REGISTRY` in `.env`:
 
 ```env
 MODEL_REGISTRY=my_model:my_model:path/to/model
@@ -168,7 +168,7 @@ modelAPI/
 │   │   ├── config.py
 │   │   └── security.py
 │   ├── models/                    # Model implementations
-│   ├── preprocessing/             # Preprocessing modules (opsional)
+│   ├── preprocessing/             # Preprocessing modules (optional)
 │   └── services/
 │       ├── base.py                # BaseHandler abstract class
 │       ├── model_registry.py      # Handler registry
@@ -189,16 +189,16 @@ MODEL_REGISTRY=name:handler:path[,name:handler:path,...]
 
 ---
 
-## TabR Handler (Contoh Implementasi)
+## TabR Handler (Example Implementation)
 
-Handler untuk model TabR (micro-expression anxiety detection).
+Handler for the TabR model (micro-expression anxiety detection).
 
 **Pipeline:**
 ```
 Video → Frames → ROI (dlib) → POC-ABS → Feature Vector → TabR → Prediction
 ```
 
-**Dependencies tambahan:**
+**Additional Dependencies:**
 - `dlib` - Face detection & landmark prediction
 - `opencv-python` - Video processing
 
