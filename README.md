@@ -1,15 +1,15 @@
 # AI Model Serving API
 
-FastAPI-based stateless inference service untuk serving multiple AI models dengan input video.
+FastAPI-based stateless inference service untuk serving multiple AI models with input video.
 
-> **Note:** Ini adalah template. Sesuaikan dependencies di `pyproject.toml` dengan kebutuhan model Anda. Hapus library yang tidak digunakan (misalnya `dlib` jika tidak perlu face detection).
+> **Note:** This is a template. Adjust the dependencies in `pyproject.toml` according to your model’s requirements. Remove any libraries that are not needed (for example, `dlib` if face detection is not required).
 
 ## Features
 
 - **Multi-Model Support** - Register multiple models dengan handler berbeda
 - **Stateless Design** - Tidak ada database, session, atau server-side state
 - **Bearer Token Auth** - Simple static token authentication
-- **Video Processing** - Support preprocessing video untuk model berbasis video
+- **Video Processing** - Support preprocessing video
 
 ## Quick Start
 
